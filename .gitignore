@@ -21,3 +21,6 @@ dependency-reduced-pom.xml
 # logs #
 *.log
 logs/
+/nbproject/private/
+/build/
+/dist/

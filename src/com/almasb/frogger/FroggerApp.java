@@ -29,7 +29,7 @@ public class FroggerApp extends Application {
 
     private List<Node> cars = new ArrayList<>();
     private Node frog;
-
+//creates the parent container
     private Parent createContent() {
         root = new Pane();
         root.setPrefSize(800, 600);
@@ -49,13 +49,14 @@ public class FroggerApp extends Application {
         return root;
     }
 
+    //create the frog
     private Node initFrog() {
         Rectangle rect = new Rectangle(38, 38, Color.GREEN);
         rect.setTranslateY(600 - 39);
 
         return rect;
     }
-
+//create the obstical for the player in this case a car.
     private Node spawnCar() {
         Rectangle rect = new Rectangle(40, 40, Color.RED);
         rect.setTranslateY((int)(Math.random() * 14) * 40);
@@ -63,7 +64,7 @@ public class FroggerApp extends Application {
         root.getChildren().add(rect);
         return rect;
     }
-
+//randomizes a car 
     private void onUpdate() {
         for (Node car : cars)
             car.setTranslateX(car.getTranslateX() + Math.random() * 10);
@@ -74,7 +75,12 @@ public class FroggerApp extends Application {
 
         checkState();
     }
-
+/**
+ * Creates the winning criteria:
+ * If the player come into contact with the frog, 
+ * end the game, otherwise, if the player makes it to the end
+ * without getting hit, they win.
+ */
     private void checkState() {
         for (Node car : cars) {
             if (car.getBoundsInParent().intersects(frog.getBoundsInParent())) {
@@ -113,7 +119,7 @@ public class FroggerApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(createContent()));
-
+        //sets the player's controls
         stage.getScene().setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case W:
